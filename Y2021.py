@@ -21,5 +21,16 @@ def Day1_21_P2():
     return counter
 
 def Day2_21_P1():
-
+    data = Get_txt(r'Data/D2Y21_dataP1.txt')
+    data = [[sample.split()[0], int(sample.split()[1])] for sample in data]
+    x = 0
+    y = 0
+    for sample in data:
+        if sample[0] == 'forward':
+            y += sample[1]
+        elif sample[0] == 'down':
+            x += sample[1]
+        elif sample[0] == 'up':
+            x -= sample[1]
+    return x * y
 
