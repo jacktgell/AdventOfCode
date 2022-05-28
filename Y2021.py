@@ -34,3 +34,37 @@ def Day2_21_P1():
             x -= sample[1]
     return x * y
 
+def Day2_21_P2():
+    data = Get_txt(r'Data/D2Y21_dataP1.txt')
+    data = [[sample.split()[0], int(sample.split()[1])] for sample in data]
+    aim = 0
+    position = 0
+    depth = 0
+    for sample in data:
+        if sample[0] == 'forward':
+            position += sample[1]
+            depth += (aim * sample[1])
+        elif sample[0] == 'down':
+            aim += sample[1]
+        elif sample[0] == 'up':
+            aim -= sample[1]
+    return position * depth
+
+def Day3_21_P1():
+    data = Get_txt(r'Data/D3Y21_dataP1.txt')
+    gamma = 0
+    for bit in range(len(data[0])):
+        ones = 0
+        zeros = 0
+        for sample in data:
+            if sample[bit] == '1':
+                ones += 1
+            elif sample[bit] == '0':
+                zeros += 1
+            else:
+                print(f'unexpected val: {bit}')
+        gamma = gamma << 1
+        if ones > zeros:
+            gamma += 1
+
+    return gamma * (~gamma & 0xfff)
