@@ -68,3 +68,30 @@ def Day3_21_P1():
             gamma += 1
 
     return gamma * (~gamma & 0xfff)
+
+def Day3_21_P2():
+    data = Get_txt(r'Data/D3Y21_dataP1.txt')
+    oxygen_ratings = [int(sample, 2) for sample in data]
+    CO2_ratings = oxygen_ratings
+    oxygen_rating = Find_Ratings_Criteria(oxygen_ratings, "most")
+    CO2_rating = Find_Ratings_Criteria(CO2_ratings, "least")
+    return oxygen_rating[0]*CO2_rating[0]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -16,3 +16,33 @@ def Get_txt_as_int(path):
 
 def Display_solution(func, problem):
     print(f'solution for {problem}: {func()}')
+
+def Find_Ratings_Criteria_Most_Or_Least_Common(common, zeros, ones):
+
+    if common == "most":
+        if len(zeros) > len(ones):
+            return zeros
+        else:
+            return ones
+    else:
+        if len(ones) >= len(zeros):
+            return zeros
+        else:
+            return ones
+
+
+def Find_Ratings_Criteria(ratings, common):
+
+    for i in range(12):
+        ones = []
+        zeros = []
+        for rating in ratings:
+            if (rating << i) & 0x000800 == 0:
+                zeros.append(rating)
+            else:
+                ones.append(rating)
+
+        ratings = Find_Ratings_Criteria_Most_Or_Least_Common(common, zeros, ones)
+        if len(ratings) == 1:
+            break
+    return ratings
