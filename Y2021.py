@@ -77,6 +77,55 @@ def Day3_21_P2():
     CO2_rating = Find_Ratings_Criteria(CO2_ratings, "least")
     return oxygen_rating[0]*CO2_rating[0]
 
+def Day4_21_P1():
+    data = Get_txt(r'Data/D4Y21_dataP1.txt')
+    sequence = data.pop(0)
+    sequence = [int(val) for val in sequence.split(',')]
+    data.pop(0)
+    cards = [[]]
+    card = 0
+
+    for line in data:
+        if line == '':
+            card += 1
+            cards.append([])
+        else:
+            vals = [int(val) for val in line.split()]
+            cards[card].append(vals)
+
+    for i, table in enumerate(cards):
+        for j in range(5):
+            cards[i].append([table[0][j], table[1][j], table[2][j], table[3][j], table[4][j]])
+
+    Flag = False
+    for i in range(5, len(sequence)):
+        for j, card in enumerate(cards):
+            for combination in card:
+                if all(elem in sequence[:i] for elem in combination):
+                    winning_card = j
+                    winning_stats = [winning_card, sequence[:i]]
+                    Flag = True
+                if Flag:
+                    break
+            if Flag:
+                break
+        if Flag:
+            break
+
+    sequence = winning_stats[1]
+    winning_card = cards[winning_stats[0]][0:5]
+    unselected = []
+    for set in winning_card:
+        for val in set:
+            if val not in sequence:
+                unselected.append(val)
+
+    return sum(unselected)*sequence[-1]
+
+
+
+
+
 
 
 
